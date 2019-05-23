@@ -1,0 +1,712 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>CAB420 - Assignment 2</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-05-23"><meta name="DC.source" content="full_assignment.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>CAB420 - Assignment 2</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Part A: SVMs and Bayes Classifiers</a></li><li><a href="#2">1)</a></li><li><a href="#7">2)</a></li><li><a href="#9">Part B: PCA &amp; Clustering</a></li><li><a href="#12">a)</a></li><li><a href="#13">b)</a></li><li><a href="#14">c)</a></li><li><a href="#17">d</a></li><li><a href="#18">e</a></li><li><a href="#19">Clustering</a></li><li><a href="#20">a)</a></li><li><a href="#21">Clear everything out</a></li><li><a href="#22">b) run k-means on the data</a></li><li><a href="#23">K=5</a></li><li><a href="#24">K=20</a></li><li><a href="#25">c) agglomerative clustering</a></li><li><a href="#26">5 clusters</a></li><li><a href="#27">20 clusters</a></li><li><a href="#29">d) EM Gaussian</a></li><li><a href="#30">5 components</a></li><li><a href="#31">20 components</a></li></ul></div><h2 id="1">Part A: SVMs and Bayes Classifiers</h2><h2 id="2">1)</h2><pre class="codeinput">clear
+close <span class="string">all</span>
+load <span class="string">data_ps3_2.mat</span>;
+</pre><p>set 1 - linear</p><pre class="codeinput">svm_test(@Klinear, 1, 1000, set1_train, set1_test);
+title(<span class="string">'Set 1 - Linear'</span>);
+hold <span class="string">off</span>;
+</pre><p>set 2 - polynomial</p><pre class="codeinput">svm_test(@Kpoly, 2, 1000, set2_train, set2_test);
+title(<span class="string">'Set 2 - Polynomial'</span>);
+hold <span class="string">off</span>;
+</pre><p>set 3 - gaussian</p><pre class="codeinput">svm_test(@Kgaussian, 1, 1000, set3_train, set3_test);
+title(<span class="string">'Set 3 - Gaussian'</span>);
+hold <span class="string">off</span>;
+</pre><pre class="codeoutput">The interior-point-convex algorithm does not accept an initial point.
+Ignoring X0.
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+WARNING: 3 training examples were misclassified!!!
+TEST RESULTS: 0.0446 of test examples were misclassified.
+The interior-point-convex algorithm does not accept an initial point.
+Ignoring X0.
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+TEST RESULTS: 0.011 of test examples were misclassified.
+The interior-point-convex algorithm does not accept an initial point.
+Ignoring X0.
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+TEST RESULTS: 0 of test examples were misclassified.
+</pre><img vspace="5" hspace="5" src="full_assignment_01.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_02.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_03.png" alt=""> <h2 id="7">2)</h2><pre class="codeinput"><span class="comment">% set 4 - all of them</span>
+linear_error = svm_test2(@Klinear, 1, 1000, set4_train, set4_test);
+poly_error = svm_test2(@Kpoly, 2, 1000, set4_train, set4_test);
+gauss_error = svm_test2(@Kgaussian, 1.5, 1000, set4_train, set4_test);
+</pre><p>The guassian method has the best results, with only 0.085 test examples being miscalsified. Polynomial was next best with 0.12, and linear was the worst with 0.1375</p><pre class="codeoutput">The interior-point-convex algorithm does not accept an initial point.
+Ignoring X0.
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+TEST RESULTS: 0.1375 of test examples were misclassified.
+The interior-point-convex algorithm does not accept an initial point.
+Ignoring X0.
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+TEST RESULTS: 0.12 of test examples were misclassified.
+The interior-point-convex algorithm does not accept an initial point.
+Ignoring X0.
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+TEST RESULTS: 0.085 of test examples were misclassified.
+</pre><h2 id="9">Part B: PCA &amp; Clustering</h2><p>clear and load stuff</p><pre class="codeinput">clear
+close <span class="string">all</span>
+X = load(<span class="string">'data/faces.txt'</span>); <span class="comment">% load face dataset</span>
+</pre><p>understand the data</p><pre class="codeinput">i=2;
+img = reshape(X(i,:),[24 24]); <span class="comment">% convert vectorized datum to 24x24 image patch</span>
+imagesc(img); axis <span class="string">square</span>; colormap <span class="string">gray</span>; <span class="comment">% display an image patch</span>
+</pre><img vspace="5" hspace="5" src="full_assignment_04.png" alt=""> <h2 id="12">a)</h2><pre class="codeinput">[m, n] = size(X);
+
+<span class="comment">% subtract the mean of the face images to make the data sero-mean</span>
+mu = mean(X);
+X0 = bsxfun(@minus, X, mu);
+
+<span class="comment">% take the SVD of the data</span>
+[U, S, V] = svd(X0);
+W=U*S;
+</pre><h2 id="13">b)</h2><pre class="codeinput">K = 1:10;
+meansquarederr = zeros(size(K));
+<span class="keyword">for</span> i=1:length(K)
+    X0_hat = W(:, 1:K(i))*V(:, 1:K(i))';
+    meansquarederr(i) = sum(mean((X0-X0_hat).^2));
+<span class="keyword">end</span>
+
+figure();
+hold <span class="string">on</span>;
+plot(meansquarederr);
+xlabel(<span class="string">'K'</span>);
+ylabel(<span class="string">'MSE'</span>);
+title(<span class="string">'Mean Squared Error for K from 1 to 10'</span>);
+hold <span class="string">off</span>;
+</pre><img vspace="5" hspace="5" src="full_assignment_05.png" alt=""> <h2 id="14">c)</h2><pre class="codeinput">positive_principals = {};
+negative_principals = {};
+</pre><p>Compute the principal directions</p><pre class="codeinput"><span class="keyword">for</span> j=1:10
+    alpha = 2*median(abs(W(:, j))); <span class="comment">% scale factor</span>
+    positive_principals{j} = mu + alpha*(V(:, j)');
+    negative_principals{j} = mu - alpha*(V(:, j)');
+<span class="keyword">end</span>
+</pre><p>Reshape them and view them as images</p><pre class="codeinput"><span class="keyword">for</span> i=1:3
+    img = reshape(positive_principals{i}, [24, 24]);
+    figure(<span class="string">'name'</span>, sprintf(<span class="string">'Positive Principal Direction %d'</span>, i));
+    imagesc(img);
+    title(sprintf(<span class="string">'Positive Principal Direction %d'</span>, i));
+    axis <span class="string">square</span>;
+    colormap <span class="string">gray</span>;
+
+    img = reshape(negative_principals{i}, [24, 24]);
+    figure(<span class="string">'name'</span>, sprintf(<span class="string">'Negative Principal Direction %d'</span>, i));
+    imagesc(img);
+    title(sprintf(<span class="string">'Negative Principal Direction %d'</span>, i))
+    axis <span class="string">square</span>;
+    colormap <span class="string">gray</span>;
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="full_assignment_06.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_07.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_08.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_09.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_10.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_11.png" alt=""> <h2 id="17">d</h2><pre class="codeinput">idx = randperm(576, 20); <span class="comment">% Generate random numbers for the index</span>
+
+figure; hold <span class="string">on</span>; axis <span class="string">ij</span>; colormap(gray);
+title(<span class="string">'Latent Space'</span>)
+xlabel(<span class="string">'Principal Component 1'</span>);
+ylabel(<span class="string">'Principal Component 2'</span>);
+
+range = max(W(idx, 1:2)) - min(W(idx, 1:2)); <span class="comment">% find range of coordinates to be plotted</span>
+scale = [200 200]./range; <span class="comment">% want 24x24 to be visible</span>
+
+<span class="keyword">for</span> i=idx
+    imagesc(W(i,1)*scale(1),W(i,2)*scale(2), reshape(X(i,:), 24, 24));
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="full_assignment_12.png" alt=""> <h2 id="18">e</h2><pre class="codeinput">K = [5, 10, 50]; <span class="comment">% the number of principal directions</span>
+idx = randperm(576, 2); <span class="comment">% pick two random faces</span>
+
+<span class="keyword">for</span> f=1:length(idx)<span class="comment">% for every face</span>
+    figure;
+    imagesc(reshape(X(idx(f),:), [24, 24]));
+    axis <span class="string">square</span>;
+    colormap <span class="string">gray</span>;
+    title(sprintf(<span class="string">'Face %d'</span>, idx(f)));
+
+    <span class="keyword">for</span> i=1:length(K) <span class="comment">% for every K value get a face estimation</span>
+        figure;
+        imagesc(reshape(W(idx(f), 1:K(i))*V(1:576, 1:K(i))', 24, 24));
+        axis <span class="string">square</span>;
+        colormap <span class="string">gray</span>;
+        title(sprintf(<span class="string">'Face %d reconstructed with K=%d principal directions'</span>, idx(f), K(i)));
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="full_assignment_13.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_14.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_15.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_16.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_17.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_18.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_19.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_20.png" alt=""> <h2 id="19">Clustering</h2><h2 id="20">a)</h2><h2 id="21">Clear everything out</h2><pre class="codeinput">close <span class="string">all</span>
+clear
+
+<span class="comment">% load the iris data restricted to the first two features</span>
+load(<span class="string">'iris.txt'</span>);
+iris = iris(:,1:2);
+
+<span class="comment">% plot the data to see the clustering</span>
+scatter(iris(:,1), iris(:,2), 15, <span class="string">'b*'</span>);
+</pre><img vspace="5" hspace="5" src="full_assignment_21.png" alt=""> <h2 id="22">b) run k-means on the data</h2><h2 id="23">K=5</h2><pre class="codeinput">K1=5;
+initial_k5 = [
+    4.68    3.22;
+    5.48    3.95;
+    4.52    2.32;
+    6.18    3.06;
+    7.2     3.2;
+];
+
+centroids = initial_k5;
+<span class="keyword">for</span> i = 1:100
+    idx = findClosestCentroids(iris, centroids);
+    centroids = computeCentroids(iris, idx, K1);
+<span class="keyword">end</span>
+
+<span class="comment">% plot</span>
+figure; hold <span class="string">on</span>;
+plotDataPoints(iris, idx, K1);
+plot(centroids(:,1), centroids(:,2), <span class="string">'kx'</span>, <span class="string">'MarkerSize'</span>, 15);
+title(<span class="string">'K-means clustering k=5'</span>);
+</pre><img vspace="5" hspace="5" src="full_assignment_22.png" alt=""> <h2 id="24">K=20</h2><pre class="codeinput">K2=20;
+initial_k20 = [
+    4.41	  3.23;
+    5.37	  3.24;
+    5.69	  2.22;
+    5.69	  3.08;
+    4.84	  2.86;
+    5.83	  2.91;
+    5.28	  2.36;
+    6.84	  2.70;
+    5.47	  4.02;
+    5.21	  3.17;
+    5.94	  2.33;
+    4.97	  2.08;
+    6.09	  2.83;
+    4.47	  3.41;
+    7.42	  3.45;
+    5.06	  3.73;
+    7.07	  3.50;
+    4.94	  3.55;
+    7.03	  2.87;
+    7.62	  2.90;
+];
+
+centroids = initial_k20;
+<span class="keyword">for</span> i = 1:10
+    idx = findClosestCentroids(iris, centroids);
+    centroids = computeCentroids(iris, idx, K2);
+<span class="keyword">end</span>
+
+<span class="comment">% plot</span>
+figure; hold <span class="string">on</span>;
+plotDataPoints(iris, idx, K2);
+plot(centroids(:,1), centroids(:,2), <span class="string">'kx'</span>, <span class="string">'MarkerSize'</span>, 15);
+title(<span class="string">'K-means clustering k=20'</span>);
+</pre><img vspace="5" hspace="5" src="full_assignment_23.png" alt=""> <h2 id="25">c) agglomerative clustering</h2><pre class="codeinput">sLink = linkage(iris, <span class="string">'single'</span>);
+cLink = linkage(iris, <span class="string">'complete'</span>);
+</pre><h2 id="26">5 clusters</h2><pre class="codeinput">colors5 = jet(5);
+clust = cluster(sLink, <span class="string">'maxclust'</span>, 5);
+figure;
+scatter(iris(:,1), iris(:,2), 15, colors5(clust,:), <span class="string">'filled'</span>);
+title(<span class="string">'Single linkage agglomerative clustering with 5 clusters'</span>);
+
+clust = cluster(cLink, <span class="string">'maxclust'</span>, 5);
+figure;
+scatter(iris(:,1), iris(:,2), 15, colors5(clust,:), <span class="string">'filled'</span>);
+title(<span class="string">'Complete linkage agglomerative clustering with 5 clusters'</span>);
+</pre><img vspace="5" hspace="5" src="full_assignment_24.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_25.png" alt=""> <h2 id="27">20 clusters</h2><pre class="codeinput">colors20 = jet(20);
+clust = cluster(sLink, <span class="string">'maxclust'</span>, 20);
+figure;
+scatter(iris(:,1), iris(:,2), 15, colors20(clust,:), <span class="string">'filled'</span>);
+title(<span class="string">'Single linkage agglomerative clustering wtih 20 clusters'</span>);
+
+clust = cluster(cLink, <span class="string">'maxclust'</span>, 20);
+figure;
+scatter(iris(:,1), iris(:,2), 15, colors20(clust,:), <span class="string">'filled'</span>);
+title(<span class="string">'Complete linkage agglomerative clustering with 20 clusters'</span>);
+</pre><img vspace="5" hspace="5" src="full_assignment_26.png" alt=""> <img vspace="5" hspace="5" src="full_assignment_27.png" alt=""> <p>Single linkage with 5 clusters gives poor results, forming only two clusters with more than one point. Complete linkage gives much better results, with 5 relativley equal groups positioned in a logical manner. K-means clustering is slightly better as the groups have a more similar number of elements in them.</p><p>Single linkage with 20 clusters also give poor results, with many clusters having few points, and only two main groups. Complete linkage gives better reuslts, with more evenly distributed clusters, but is messy. This is probably too many clusters for this dataset. This looks to be similarly effective to k-means clustering.</p><h2 id="29">d) EM Gaussian</h2><pre class="codeinput">clear;
+<span class="comment">% Load data</span>
+load(<span class="string">'iris.txt'</span>);
+iris = [iris(:,1), iris(:,2)];
+
+<span class="comment">% set the colormaps for the different number of clusters</span>
+colors5 = jet(5);
+colors20 = jet(20);
+</pre><h2 id="30">5 components</h2><p>can try changing the initial clusters to get better results</p><pre class="codeinput">K = 5;
+initial_clusters = [
+    4.68    3.22;
+    5.48    3.95;
+    4.52    2.32;
+    6.18    3.06;
+    7.2     3.2;
+];
+
+<span class="comment">% run EM gaussian mixture model</span>
+[assign, clusters, ~, ~] = emCluster(iris, 5, initial_clusters);
+
+figure; hold <span class="string">on</span>;
+scatter(iris(:,1), iris(:,2), 15, colors5(assign,:), <span class="string">'filled'</span>);
+<span class="keyword">for</span> i = 1:K
+    plotGauss2D(clusters.mu(i,:), clusters.Sig(:,:,i), <span class="string">'k'</span>, <span class="string">'linewidth'</span>, 1);
+<span class="keyword">end</span>
+title(<span class="string">'EM Gausian mixture Model with 5 Components'</span>);
+</pre><pre class="codeoutput">Warning: emclust:iter :: stopped after reaching maximum number of iterations 
+</pre><img vspace="5" hspace="5" src="full_assignment_28.png" alt=""> <h2 id="31">20 components</h2><pre class="codeinput">K = 20;
+initial_clusters = [
+    6.4913    2.9333;
+    4.4814    2.9917;
+    6.2679    2.9460;
+    6.8588    3.0600;
+    4.7738    3.2812;
+    4.9284    2.4325;
+    5.7432    3.0969;
+    7.7151    2.8911;
+    5.8724    2.7003;
+    6.4796    2.8164;
+    6.3604    2.5873;
+    5.4780    3.4583;
+    7.9528    3.8910;
+    6.4738    3.2295;
+    6.4996    3.2526;
+    6.1055    2.8347;
+    4.3266    3.0099;
+    4.9465    3.1763;
+    5.1536    3.3008;
+    4.8142    3.4620;
+];
+
+<span class="comment">% run EM gaussian mixture model</span>
+[assign, clusters, ~, ~] = emCluster(iris, 20, initial_clusters);
+
+<span class="comment">% Plot the results</span>
+figure; hold <span class="string">on</span>;
+scatter(iris(:,1), iris(:,2), 15, colors20(assign,:), <span class="string">'filled'</span>);
+<span class="keyword">for</span> i = 1:K
+    plotGauss2D(clusters.mu(i,:), clusters.Sig(:,:,i), <span class="string">'k'</span>, <span class="string">'linewidth'</span>, 1);
+<span class="keyword">end</span>
+title(<span class="string">'EM Gausian mixture Model with 20 Components'</span>);
+</pre><pre class="codeoutput">Warning: emclust:iter :: stopped after reaching maximum number of iterations 
+</pre><img vspace="5" hspace="5" src="full_assignment_29.png" alt=""> <p>The EM gaussian mixture model with 5 components doesnt give great results, it is worse than the complete linkage and the k-means models. The groups are overlapping each other and dont make much sense as groupings.</p><p>The EM gaussian mixutre model with 20 components is once again very messy, and also has overlapping groups. This is worse than the k-means and complete linkage clustering algorithms</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% CAB420 - Assignment 2
+%%% Part A: SVMs and Bayes Classifiers
+%% 1)
+clear
+close all
+load data_ps3_2.mat;
+%%%
+% set 1 - linear
+svm_test(@Klinear, 1, 1000, set1_train, set1_test);
+title('Set 1 - Linear');
+hold off;
+%%%
+% set 2 - polynomial
+svm_test(@Kpoly, 2, 1000, set2_train, set2_test);
+title('Set 2 - Polynomial');
+hold off;
+%%%
+% set 3 - gaussian
+svm_test(@Kgaussian, 1, 1000, set3_train, set3_test);
+title('Set 3 - Gaussian');
+hold off;
+%%%
+%% 2)
+
+% set 4 - all of them
+linear_error = svm_test2(@Klinear, 1, 1000, set4_train, set4_test);
+poly_error = svm_test2(@Kpoly, 2, 1000, set4_train, set4_test);
+gauss_error = svm_test2(@Kgaussian, 1.5, 1000, set4_train, set4_test);
+
+%%%
+% The guassian method has the best results, with only 0.085 test examples
+% being miscalsified. Polynomial was next best with 0.12, and linear was
+% the worst with 0.1375
+
+%% Part B: PCA & Clustering
+%%%
+% clear and load stuff
+clear
+close all
+X = load('data/faces.txt'); % load face dataset
+
+%%%
+% understand the data
+i=2;
+img = reshape(X(i,:),[24 24]); % convert vectorized datum to 24x24 image patch
+imagesc(img); axis square; colormap gray; % display an image patch
+
+%% a)
+[m, n] = size(X);
+
+% subtract the mean of the face images to make the data sero-mean
+mu = mean(X);
+X0 = bsxfun(@minus, X, mu);
+
+% take the SVD of the data
+[U, S, V] = svd(X0);
+W=U*S;
+
+%% b)
+K = 1:10;
+meansquarederr = zeros(size(K));
+for i=1:length(K)
+    X0_hat = W(:, 1:K(i))*V(:, 1:K(i))';
+    meansquarederr(i) = sum(mean((X0-X0_hat).^2));
+end
+
+figure();
+hold on;
+plot(meansquarederr);
+xlabel('K');
+ylabel('MSE');
+title('Mean Squared Error for K from 1 to 10');
+hold off;
+
+%% c)
+positive_principals = {};
+negative_principals = {};
+
+%%%
+% Compute the principal directions
+for j=1:10
+    alpha = 2*median(abs(W(:, j))); % scale factor
+    positive_principals{j} = mu + alpha*(V(:, j)');
+    negative_principals{j} = mu - alpha*(V(:, j)');
+end
+
+%%%
+% Reshape them and view them as images
+for i=1:3
+    img = reshape(positive_principals{i}, [24, 24]);
+    figure('name', sprintf('Positive Principal Direction %d', i));
+    imagesc(img);
+    title(sprintf('Positive Principal Direction %d', i));
+    axis square;
+    colormap gray;
+
+    img = reshape(negative_principals{i}, [24, 24]);
+    figure('name', sprintf('Negative Principal Direction %d', i));
+    imagesc(img);
+    title(sprintf('Negative Principal Direction %d', i))
+    axis square;
+    colormap gray;
+end
+
+%% d
+idx = randperm(576, 20); % Generate random numbers for the index
+
+figure; hold on; axis ij; colormap(gray);
+title('Latent Space')
+xlabel('Principal Component 1');
+ylabel('Principal Component 2');
+
+range = max(W(idx, 1:2)) - min(W(idx, 1:2)); % find range of coordinates to be plotted
+scale = [200 200]./range; % want 24x24 to be visible
+
+for i=idx
+    imagesc(W(i,1)*scale(1),W(i,2)*scale(2), reshape(X(i,:), 24, 24)); 
+end
+
+%% e
+K = [5, 10, 50]; % the number of principal directions
+idx = randperm(576, 2); % pick two random faces
+
+for f=1:length(idx)% for every face
+    figure;
+    imagesc(reshape(X(idx(f),:), [24, 24]));
+    axis square;
+    colormap gray;
+    title(sprintf('Face %d', idx(f)));
+    
+    for i=1:length(K) % for every K value get a face estimation
+        figure;
+        imagesc(reshape(W(idx(f), 1:K(i))*V(1:576, 1:K(i))', 24, 24));
+        axis square;
+        colormap gray;
+        title(sprintf('Face %d reconstructed with K=%d principal directions', idx(f), K(i)));
+    end
+end
+
+%% Clustering
+%% a)
+%%% Clear everything out
+close all
+clear
+
+% load the iris data restricted to the first two features
+load('iris.txt');
+iris = iris(:,1:2);
+
+% plot the data to see the clustering
+scatter(iris(:,1), iris(:,2), 15, 'b*');
+
+%% b) run k-means on the data
+%% K=5
+K1=5;
+initial_k5 = [
+    4.68    3.22;
+    5.48    3.95;
+    4.52    2.32;
+    6.18    3.06;
+    7.2     3.2;
+];
+
+centroids = initial_k5;
+for i = 1:100
+    idx = findClosestCentroids(iris, centroids);
+    centroids = computeCentroids(iris, idx, K1);
+end
+
+% plot
+figure; hold on;
+plotDataPoints(iris, idx, K1);
+plot(centroids(:,1), centroids(:,2), 'kx', 'MarkerSize', 15);
+title('K-means clustering k=5');
+
+%% K=20
+K2=20;
+initial_k20 = [  
+    4.41	  3.23;
+    5.37	  3.24;
+    5.69	  2.22;
+    5.69	  3.08;
+    4.84	  2.86;
+    5.83	  2.91;
+    5.28	  2.36;
+    6.84	  2.70;
+    5.47	  4.02;
+    5.21	  3.17;
+    5.94	  2.33;
+    4.97	  2.08;
+    6.09	  2.83;
+    4.47	  3.41;
+    7.42	  3.45;
+    5.06	  3.73;
+    7.07	  3.50;
+    4.94	  3.55;
+    7.03	  2.87;
+    7.62	  2.90;
+];
+
+centroids = initial_k20;
+for i = 1:10
+    idx = findClosestCentroids(iris, centroids);
+    centroids = computeCentroids(iris, idx, K2);
+end
+
+% plot
+figure; hold on;
+plotDataPoints(iris, idx, K2);
+plot(centroids(:,1), centroids(:,2), 'kx', 'MarkerSize', 15);
+title('K-means clustering k=20');
+
+%% c) agglomerative clustering
+sLink = linkage(iris, 'single');
+cLink = linkage(iris, 'complete');
+
+%% 5 clusters
+colors5 = jet(5);
+clust = cluster(sLink, 'maxclust', 5);
+figure;
+scatter(iris(:,1), iris(:,2), 15, colors5(clust,:), 'filled');
+title('Single linkage agglomerative clustering with 5 clusters');
+
+clust = cluster(cLink, 'maxclust', 5);
+figure;
+scatter(iris(:,1), iris(:,2), 15, colors5(clust,:), 'filled');
+title('Complete linkage agglomerative clustering with 5 clusters');
+
+
+%% 20 clusters
+
+colors20 = jet(20);
+clust = cluster(sLink, 'maxclust', 20);
+figure;
+scatter(iris(:,1), iris(:,2), 15, colors20(clust,:), 'filled');
+title('Single linkage agglomerative clustering wtih 20 clusters');
+
+clust = cluster(cLink, 'maxclust', 20);
+figure;
+scatter(iris(:,1), iris(:,2), 15, colors20(clust,:), 'filled');
+title('Complete linkage agglomerative clustering with 20 clusters');
+
+%%
+% Single linkage with 5 clusters gives poor results, forming only two
+% clusters with more than one point. Complete linkage gives much better results, with 5
+% relativley equal groups positioned in a logical manner. K-means
+% clustering is slightly better as the groups have a more similar number of
+% elements in them.
+%
+% Single linkage with 20 clusters also give poor results, with many
+% clusters having few points, and only two main groups. Complete linkage
+% gives better reuslts, with more evenly distributed clusters, but is
+% messy. This is probably too many clusters for this dataset. This looks to
+% be similarly effective to k-means clustering.
+
+%% d) EM Gaussian
+
+clear;
+% Load data
+load('iris.txt');
+iris = [iris(:,1), iris(:,2)];
+
+% set the colormaps for the different number of clusters
+colors5 = jet(5);
+colors20 = jet(20);
+
+%% 5 components
+% can try changing the initial clusters to get better results
+K = 5;
+initial_clusters = [
+    4.68    3.22;
+    5.48    3.95;
+    4.52    2.32;
+    6.18    3.06;
+    7.2     3.2;
+];
+
+% run EM gaussian mixture model
+[assign, clusters, ~, ~] = emCluster(iris, 5, initial_clusters);
+
+figure; hold on;
+scatter(iris(:,1), iris(:,2), 15, colors5(assign,:), 'filled');
+for i = 1:K
+    plotGauss2D(clusters.mu(i,:), clusters.Sig(:,:,i), 'k', 'linewidth', 1);
+end
+title('EM Gausian mixture Model with 5 Components');
+
+%% 20 components
+K = 20;
+initial_clusters = [
+    6.4913    2.9333;    
+    4.4814    2.9917;    
+    6.2679    2.9460;    
+    6.8588    3.0600;
+    4.7738    3.2812;    
+    4.9284    2.4325;    
+    5.7432    3.0969;    
+    7.7151    2.8911;
+    5.8724    2.7003;    
+    6.4796    2.8164;    
+    6.3604    2.5873;    
+    5.4780    3.4583;
+    7.9528    3.8910;    
+    6.4738    3.2295;    
+    6.4996    3.2526;    
+    6.1055    2.8347;
+    4.3266    3.0099;    
+    4.9465    3.1763;    
+    5.1536    3.3008;    
+    4.8142    3.4620;
+];
+
+% run EM gaussian mixture model
+[assign, clusters, ~, ~] = emCluster(iris, 20, initial_clusters);
+
+% Plot the results
+figure; hold on;
+scatter(iris(:,1), iris(:,2), 15, colors20(assign,:), 'filled');
+for i = 1:K
+    plotGauss2D(clusters.mu(i,:), clusters.Sig(:,:,i), 'k', 'linewidth', 1);
+end
+title('EM Gausian mixture Model with 20 Components');
+
+%%
+% The EM gaussian mixture model with 5 components doesnt give great results,
+% it is worse than the complete linkage and the k-means models. The groups
+% are overlapping each other and dont make much sense as groupings.
+%
+% The EM gaussian mixutre model with 20 components is once again very
+% messy, and also has overlapping groups. This is worse than the k-means
+% and complete linkage clustering algorithms
+
+
+##### SOURCE END #####
+--></body></html>

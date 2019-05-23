@@ -22,10 +22,10 @@ X0 = bsxfun(@rdivide, X0, sigma);
 W=U*S;
 
 %% b)
-ks = 1:10;
-mserrs = zeros(size(ks));
-for i=1:length(ks)
-    X0_hat = W(:, 1:ks(i))*V(:, 1:ks(i))';
+K = 1:10;
+mserrs = zeros(size(K));
+for i=1:length(K)
+    X0_hat = W(:, 1:K(i))*V(:, 1:K(i))';
     mserrs(i) = mean(mean((X0-X0_hat).^2));
 end
 
@@ -76,8 +76,8 @@ for i=idx
 end
 
 %% e
-ks = [5, 10, 50];
-faces = [354, 86, 129];
+K = [5, 10, 50];
+faces = [86, 129];
 
 for f=1:length(faces)% for every face
     figure('name', sprintf('face %d', faces(f)));
@@ -85,11 +85,11 @@ for f=1:length(faces)% for every face
     axis square;
     colormap gray;
     title(sprintf('face %d', faces(f)));
-    for i=1:length(ks) % for every k
-        figure('name', sprintf('face %d reconstructed with %d pcs', faces(f), ks(i)));
-        imagesc(reshape(W(faces(f), 1:ks(i))*V(1:576, 1:ks(i))', 24, 24));
+    for i=1:length(K) % for every k
+        figure('name', sprintf('face %d reconstructed with %d principal directions', faces(f), K(i)));
+        imagesc(reshape(W(faces(f), 1:K(i))*V(1:576, 1:K(i))', 24, 24));
         axis square;
         colormap gray;
-        title(sprintf('face %d reconstructed with %d pcs', faces(f), ks(i)));
+        title(sprintf('face %d reconstructed with %d principal directions', faces(f), K(i)));
     end
 end

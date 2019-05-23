@@ -3,11 +3,11 @@ clear
 close all
 load data_ps3_2.mat;
 
-% set 1 - linear
+%% set 1 - linear
 svm_test(@Klinear, 1, 1000, set1_train, set1_test);
-% set 2 - polynomial
+%% set 2 - polynomial
 svm_test(@Kpoly, 2, 1000, set2_train, set2_test);
-% set 3 - gaussian
+%% set 3 - gaussian
 svm_test(@Kgaussian, 1, 1000, set3_train, set3_test);
 
 

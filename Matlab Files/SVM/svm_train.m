@@ -22,7 +22,7 @@ UB = C * ones(n,1);
 X0 = zeros(n,1);
 
 warning off; % suppress 'Warning: Large-scale method ...'
-alpha = quadprog(H+1e-10*eye(n),f,A,b,Aeq,beq,LB,UB,X0)
+alpha = quadprog(H+1e-10*eye(n),f,A,b,Aeq,beq,LB,UB,X0);
 warning on;
 
 % essentially, we have added a (weak) regularization term to

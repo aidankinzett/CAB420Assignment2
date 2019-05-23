@@ -24,4 +24,4 @@ hold on;
 plot(test_data.X(errors,1),test_data.X(errors,2),'k.');
 
 svm_plot(train_data,svm);
-hold off;
+% hold off;

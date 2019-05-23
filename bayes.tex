@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 % Uncomment the following line to allow the usage of graphics (.png, .jpg)
 \usepackage{graphicx}
+\usepackage[T1]{fontenc}
 
 % Start the document
 \begin{document}
@@ -12,31 +13,32 @@
 
 \subsection{a)}
 
-Probabilities needed for joint Bayes classifier can be found by counting the number of occurances of each possible x1 x2 combination ([0,0] [0,1] [1,0] [1,1]). Then finding how many of each of these assosiate with each class. E.g.
+A joint Bayes classifier can be found by counting how many times each possible (x1, x2) combination occurs, then finding how many of each of these associate with the y class
 
-Where $$ y=0 $$
+Where $$ x = [0,0] $$
+$$ P(y|x) = \frac{1}{4}\ ,\ y = 0 $$
+$$ P(y|x) = \frac{3}{4}\ ,\ y = 1$$
 
-$$ P(y|x) = \frac{1}{4}\ ,\ x = [0,0] $$
+Where $$x = [0,1]$$
+$$ P(y|x) = \frac{1}{4}\ ,\  y = 0$$
+$$ P(y|x) = \frac{3}{4}\ ,\ y = 1 $$
 
-$$ P(y|x) = \frac{1}{4}\ ,\ x = [0,1] $$
+Where $$x = [1,0]$$
+$$ P(y|x) = \frac{3}{3}\ ,\ y = 0 $$
+$$ P(y|x) = \frac{0}{3}\ ,\ y = 1 $$
 
-$$ P(y|x) = \frac{3}{3}\ ,\ x = [1,0] $$
+Where $$x = [1,1]$$
+$$ P(y|x) = \frac{3}{5}\ ,\ y = 0 $$
+$$ P(y|x) = \frac{2}{5}\ ,\ y = 1 $$
 
-$$ P(y|x) = \frac{3}{5}\ ,\ x = [1,1] $$
 
-Where $$ y=1 $$
+\begin{flushleft}
+So the complete class table is:
+\end{flushleft}{}
 
-$$ P(y|x) = \frac{3}{4}\ ,\ x = [0,0] $$
-
-$$ P(y|x) = \frac{3}{4}\ ,\ x = [0,1] $$
-
-$$ P(y|x) = \frac{0}{3}\ ,\ x = [1,0] $$
-
-$$ P(y|x) = \frac{2}{5}\ ,\ x = [1,1] $$
-
-Therefore, the complete class predictions on the test set looks as follows:
 
 \begin{table}[h]
+\centering
 \begin{tabular}{lllll}
  x1  &  x2  &  P(y=0|x)  &  P(y=1|x)  &  y-hat \\
    0  &   1  &     25\%    &     75\%    &    1 \\
@@ -47,15 +49,16 @@ Therefore, the complete class predictions on the test set looks as follows:
 
 \subsection{(b)}
 
-To create a Naive Bayes classifier first the probabilities of each class will be needed:
+For a Naive Bayes classified the probabilities of each class, which are equal, will be needed
 
 $$ P(y=0) = \frac{8}{16} $$
 
 $$ P(y=1) = \frac{8}{16} $$
 
-Next, the probability that each x could be in each class:
+Next, the probability of each x for the two classes is needed
 
 \begin{table}[h]
+	\centering
 \begin{tabular}{lllll}
        &   y=0 &  y=1 \\
    x1  &  6/8  &  2/8\\
@@ -63,7 +66,7 @@ Next, the probability that each x could be in each class:
 \end{tabular}
 \end{table}
 
-To classify the test set P(x|y) is calculated for each $x_1,\ x_2$ combination seen in the test set, on each class
+Next, calculate P(x|y) for each $()x_1,\ x_2)$ combination for each class, seen in the test set
 
 $$ P(x=[0,1]\ |\ y=0) = P(x_1\ |\ y)\cdot P(x_2\ |\ y)$$
 
@@ -101,11 +104,9 @@ $$ = \left(\frac{2}{8}\right)\cdot \left(\frac{5}{8}\right) $$
 
 $$ = \frac{5}{32} $$
 
-Next the P(x) is calculated with the formula
+Calculate P(x) for each combination of  $()x_1,\ x_2)$ with the following formula
 
 $$ P(x) = \sum_i P(x|y_i)\cdot P(y_i) $$
-
-on all test data values of x.
 
 $$ P(x = [0,1]) = \left(\frac{1}{8} \cdot \frac{1}{2}\right) + \left(\frac{15}{32} \cdot \frac{1}{2}\right) $$
 
@@ -119,11 +120,11 @@ $$ P(x = [1,1]) = \left(\frac{3}{8} \cdot \frac{1}{2}\right) + \left(\frac{5}{32
 
 $$ = \frac{17}{64} $$
 
-Finally, the probability of y given each x value can be found by using Bayes rule:
+Then use Bayes Rule to find the probability of y given each x value.
 
 $$ P(y|x) = \frac{P(x|y) \cdot P(y)}{P(x)} $$
 
-On x=[0,1]:
+x=[0,1]:
 
 $$ P(y=0|x=[0,1]) = \frac{P(x|y) \cdot P(y)}{P(x)} $$
 
@@ -135,7 +136,7 @@ Therefore:
 
 $$ P(y=1|x=[0,1]) \approx 79\% $$
 
-And on x=[1,0]:
+x=[1,0]:
 
 $$ P(y=0|x=[1,0]) = \frac{P(x|y) \cdot P(y)}{P(x)} $$
 
@@ -147,7 +148,7 @@ Therefore:
 
 $$ P(y=1|x=[0,1]) \approx 20\% $$
 
-And on x=[1,1]:
+x=[1,1]:
 
 $$ P(y=0|x=[1,1]) = \frac{P(x|y) \cdot P(y)}{P(x)} $$
 
@@ -159,8 +160,9 @@ Therefore:
 
 $$ P(y=1|x=[0,1]) \approx 29\% $$
 
-Therefore, the complete class predictions on the test set using Naive Bayes looks as follows:
+The complete predictions on the test set using Naive Bayes is then
 \begin{table}[h]
+	\centering
 \begin{tabular}{lllll}
   x1  &  x2  &  P(y=0|x)  &  P(y=1|x)  &  y-hat \\
    0  &   1  &     21\%    &     79\%    &    1 \\
